@@ -1,0 +1,46 @@
+﻿@model List<TestDev.Models.Cliente>
+
+
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+
+<div class="card">
+    <div class="card-header">
+        <h5>Lista de Clientes</h5>
+    </div>
+    <div class="card-body">
+        <a class="btn btn-success btn-sm" asp-action="Cliente_Detalle" asp-controller="Home" asp-route-CliId="0">Crear Nuevo</a>
+        <hr />
+
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Razon Social</th>
+                    <th>CUIT</th>
+                    <th>Direccion</th>
+                    <th>Deshabilitado</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.RazonSocial</td>
+                        <td>@item.Cuit</td>
+                        <td>@item.Direccion</td>
+                        <td>@item.Deshabilitado</td>
+                        <td>
+                            <a class="btn alert-primary btn-sm" asp-action="Cliente_Detalle" asp-controller="Home" asp-route-CliId="@item.CliId">Editar</a>
+                            <a class="btn alert-danger btn-sm" asp-action="Eliminar" asp-controller="Home" asp-route-CliId="@item.CliId">Eliminar</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+
+    </div>
+</div>

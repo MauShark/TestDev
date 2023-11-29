@@ -1,0 +1,58 @@
+﻿@model TestDev.Models.Cliente;
+
+@{
+    ViewData["Title"] = "Eliminar";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h3 class="text-danger">¿Está seguro que desea eliminar el cliente?</h3>
+<hr />
+
+<div class="row">
+    <div class="col-sm-4">
+        <form asp-action="Eliminar" asp-controller="Home" method="post">
+            <input Type="hidden" asp-for="CliId" />
+
+
+            <div class="mb-2">
+                <label class="form-label" asp-for="RazonSocial">Razon Social</label>
+                <input class="form-control form-control-sm" asp-for=RazonSocial type="text" disabled />
+
+            </div>
+
+            <div class="mb-2">
+                <label class="form-label" asp-for="Cuit">Cuit</label>
+                <input class="form-control form-control-sm" asp-for=Cuit type="text" disabled />
+
+            </div>
+
+            <div class="mb-2">
+
+                <label class="form-label" asp-for="Direccion">Direccion</label>
+                <input class="form-control form-control-sm" asp-for=Direccion type="text" disabled />
+
+            </div>
+            
+                <div class="mb-2">
+
+                    <div class="form-check form-switch">
+                    <input class="form-check-input" asp-for="Deshabilitado" type="checkbox" disabled />
+                        <label class="form-check-label">Habilitado</label>
+                    </div>
+                </div>
+           
+
+            <div class="mb-2">
+
+
+                
+                    <button class="btn btn-danger btn-sm w-25" type="submit">Eliminar</button>
+                
+                <a class="btn btn-dark btn-sm" asp-action="index" asp-controller="Home">Volver</a>
+
+            </div>
+        </form>
+    </div>
+</div>
+
+

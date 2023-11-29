@@ -1,0 +1,79 @@
+﻿@model TestDev.Models.ViewModels.ClienteVM;
+
+
+
+@{
+    ViewData["Title"] = "Cliente_Detalle";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+@if (Model.oCliente.CliId == 0)
+{
+    <h1>Crear Cliente</h1>
+}
+else
+{
+    <h1>Editar Cliente</h1>
+}
+
+<div class="row">
+    <div class="col-sm-4">
+        <form asp-action="Cliente_Detalle" asp-controller="Home" method="post">
+            <input Type="hidden" asp-for="oCliente.CliId" />
+            
+
+            <div class="mb-2">
+                <label class="form-label" asp-for="oCliente.RazonSocial">Razon Social</label>
+                <input class="form-control form-control-sm" asp-for=oCliente.RazonSocial type="text" />
+
+            </div>
+
+            <div class="mb-2">
+                <label class="form-label" asp-for="oCliente.Cuit">Cuit</label>
+                <input class="form-control form-control-sm" asp-for=oCliente.Cuit type="text" />
+
+            </div>
+            
+            <div class="mb-2">
+
+                <label class="form-label" asp-for="oCliente.Direccion">Direccion</label>
+                <input class="form-control form-control-sm" asp-for=oCliente.Direccion type="text" />
+
+            </div>
+            <div class="mb-2">
+
+                @* <div class="form-group">
+                    <label asp-for="oCliente.Deshabilitado" class="control-label">Deshabilitado?</label>
+                    <select asp-for="oCliente.Deshabilitado" class="form-control">
+                        <option value="True">Sí</option>
+                        <option value="False">No</option>
+                    </select>
+                </div> *@
+
+                    <div class="form-check form-switch">
+                        <input class="form-check-input" asp-for="oCliente.Deshabilitado" type="checkbox" />
+                        <label class="form-check-label">Habilitado</label>
+                    </div>
+                
+            </div>
+                      
+            <div class="mb-2">
+
+
+                @if (Model.oCliente.CliId == 0)
+                {
+                    <button class="btn btn-primary btn-sm w-25" type="submit">Crear</button>
+                }
+                else
+                {
+                    <button class="btn btn-primary btn-sm w-25" type="submit">Actualizar</button>
+                }
+
+                <a class="btn btn-dark btn-sm" asp-action="index" asp-controller="Home">Volver</a>
+
+            </div>
+        </form>
+    </div>
+</div>
+
