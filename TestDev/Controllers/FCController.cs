@@ -31,7 +31,7 @@ namespace TestDev.Controllers
             FacturaCabeceraVM oCabeceraVM = new FacturaCabeceraVM()
             {
 
-                oCabecera = new FacturaCabecera()
+                 oCabecera = new FacturaCabecera()
 
 
             };
@@ -40,9 +40,60 @@ namespace TestDev.Controllers
             {
                 oCabeceraVM.oCabecera = _DBcontext.FacturaCabeceras.Find(FcID);
             }
+            else
+            {
+                oCabeceraVM.oCabecera.FcId = _DBcontext.FacturaCabeceras.Max(i => i.FcId) + 1;
+            }
+            
 
             return View(oCabeceraVM);
         }
+
+        [HttpPost]
+        public IActionResult Factura_Detalle(FacturaCabeceraVM oCabeceraVM)
+        {
+            
+            int id = oCabeceraVM.oCabecera.FcId;
+            FacturaCabecera exists = _DBcontext.FacturaCabeceras.Find(id);
+            
+
+            if (exists == null)
+            {
+                oCabeceraVM.oCabecera.FcId = 0;
+                _DBcontext.FacturaCabeceras.Add(oCabeceraVM.oCabecera);
+
+            }
+            else
+            {
+                _DBcontext.FacturaCabeceras.Update(oCabeceraVM.oCabecera);
+            }
+            _DBcontext.SaveChanges();
+
+
+            return RedirectToAction("IndexFC","FC");
+
+        }
+
+        [HttpGet]
+        public IActionResult Factura_Eliminar(int FcID)
+        {
+            FacturaCabecera oFacturaCabecera = _DBcontext.FacturaCabeceras.Find(FcID);
+                //.Include(fc => fc.Cli);
+
+            return View(oFacturaCabecera);
+        }
+
+        [HttpPost]
+
+        public IActionResult Factura_Eliminar(FacturaCabecera oFacturaCabecera)
+        {
+            _DBcontext.FacturaCabeceras.Remove(oFacturaCabecera);
+
+            _DBcontext.SaveChanges();
+
+            return RedirectToAction("IndexFC", "FC");
+        }
+
 
     }
 }

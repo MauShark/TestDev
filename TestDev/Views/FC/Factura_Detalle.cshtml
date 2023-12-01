@@ -1,0 +1,66 @@
+﻿@model TestDev.Models.ViewModels.FacturaCabeceraVM;
+
+@{
+    ViewData["Title"] = "Factura_Detalle";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+
+@if (Model.oCabecera.FcId == 0)
+{
+    <h1>Crear Factura</h1>
+}
+else
+{
+    <h1>Editar Factura</h1>
+}
+
+<div class="row">
+    <div class="col-sm-4">
+        <form asp-action="Factura_Detalle" asp-controller="FC" method="post">
+            <input Type="hidden" asp-for="oCabecera.FcId" />
+
+            <div class="mb-2">
+                <label class="form-label" asp-for="oCabecera.FcId">N°Factura</label>
+                <input class="form-control form-control-sm" asp-for=oCabecera.FcId type="text" disabled/>
+
+            </div>
+                       
+            <div class="mb-2">
+                <label class="form-label" asp-for="oCabecera.CliId">Cliente</label>
+                <input class="form-control form-control-sm" asp-for=oCabecera.CliId type="text" />
+
+            </div>
+            <div class="mb-2">
+                <label class="form-label" asp-for="oCabecera.FechaAlta">Fecha Alta</label>
+                <input class="form-control form-control-sm" asp-for=oCabecera.FechaAlta type="text" />
+
+            </div>
+
+            <div class="mb-2">
+                <label class="form-label" asp-for="oCabecera.Estado">Estado</label>
+                <input class="form-control form-control-sm" asp-for=oCabecera.Estado type="text" />
+
+            </div>
+            
+
+            <div class="mb-2">
+
+
+                @if (Model.oCabecera.FcId == 0)
+                {
+                    <button class="btn btn-primary btn-sm w-25" type="submit">Crear</button>
+                }
+                else
+                {
+                    <button class="btn btn-primary btn-sm w-25" type="submit">Actualizar</button>
+                }
+
+                <a class="btn btn-dark btn-sm" asp-action="indexFC" asp-controller="FC">Volver</a>
+
+            </div>
+        </form>
+    </div>
+</div>

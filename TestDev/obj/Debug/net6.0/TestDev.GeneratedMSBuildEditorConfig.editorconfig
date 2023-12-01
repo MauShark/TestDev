@@ -18,6 +18,14 @@ build_property.GenerateRazorMetadataSourceChecksumAttributes =
 build_property.MSBuildProjectDirectory = C:\Users\admin\source\repos\TestDev\TestDev
 build_property._RazorSourceGeneratorDebug = 
 
+[C:/Users/admin/source/repos/TestDev/TestDev/Views/FC/Factura_Detalle.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRkNcRmFjdHVyYV9EZXRhbGxlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/admin/source/repos/TestDev/TestDev/Views/FC/Factura_Eliminar.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRkNcRmFjdHVyYV9FbGltaW5hci5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/admin/source/repos/TestDev/TestDev/Views/FC/IndexFC.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRkNcSW5kZXhGQy5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
