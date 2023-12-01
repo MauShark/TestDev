@@ -1,7 +1,7 @@
 ﻿@model TestDev.Models.ViewModels.FacturaCabeceraVM;
 
 @{
-    ViewData["Title"] = "Factura_Detalle";
+    ViewData["Title"] = "Factura_Cabecera";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -19,7 +19,7 @@ else
 
 <div class="row">
     <div class="col-sm-4">
-        <form asp-action="Factura_Detalle" asp-controller="FC" method="post">
+        <form asp-action="Factura_Cabecera" asp-controller="FC" method="post">
             <input Type="hidden" asp-for="oCabecera.FcId" />
 
             <div class="mb-2">

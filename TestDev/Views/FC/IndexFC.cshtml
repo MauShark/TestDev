@@ -10,7 +10,7 @@
         <h5>Facturas</h5>
     </div>
     <div class="card-body">
-        <a class="btn btn-success btn-sm" asp-action="Factura_detalle" asp-controller="FC" asp-route-FcID="0">Crear Nuevo</a>
+        <a class="btn btn-success btn-sm" asp-action="Factura_Cabecera" asp-controller="FC" asp-route-FcID="0">Crear Nuevo</a>
         <hr />
 
         <table class="table table-striped">
@@ -45,7 +45,7 @@
                             </p>
                         </td>
                         <td>
-                            <a class="btn alert-primary btn-sm" asp-action="Factura_Detalle" asp-controller="FC" asp-route-FcID="@item.FcId">Editar</a>
+                            <a class="btn alert-primary btn-sm" asp-action="Factura_Cabecera" asp-controller="FC" asp-route-FcID="@item.FcId">Editar</a>
                             <a class="btn alert-danger btn-sm" asp-action="Factura_Eliminar" asp-controller="FC" asp-route-FcID="@item.FcId">Eliminar</a>
                         </td>
                        

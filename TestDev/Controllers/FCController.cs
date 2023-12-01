@@ -26,7 +26,7 @@ namespace TestDev.Controllers
         }
 
         [HttpGet]
-        public IActionResult Factura_Detalle(int FcID)
+        public IActionResult Factura_Cabecera(int FcID)
         {
             FacturaCabeceraVM oCabeceraVM = new FacturaCabeceraVM()
             {
@@ -50,7 +50,7 @@ namespace TestDev.Controllers
         }
 
         [HttpPost]
-        public IActionResult Factura_Detalle(FacturaCabeceraVM oCabeceraVM)
+        public IActionResult Factura_Cabecera(FacturaCabeceraVM oCabeceraVM)
         {
             
             int id = oCabeceraVM.oCabecera.FcId;
