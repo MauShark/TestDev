@@ -54,8 +54,8 @@ namespace TestDev.Controllers
         {
             
             int id = oCabeceraVM.oCabecera.FcId;
+
             FacturaCabecera exists = _DBcontext.FacturaCabeceras.Find(id);
-            
 
             if (exists == null)
             {
@@ -65,7 +65,8 @@ namespace TestDev.Controllers
             }
             else
             {
-                _DBcontext.FacturaCabeceras.Update(oCabeceraVM.oCabecera);
+                _DBcontext.Entry(exists).CurrentValues.SetValues(oCabeceraVM.oCabecera);
+                // _DBcontext.FacturaCabeceras.Update(oCabeceraVM.oCabecera);
             }
             _DBcontext.SaveChanges();
 
