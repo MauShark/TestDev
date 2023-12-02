@@ -18,6 +18,7 @@
             <thead>
                 <tr>
                     <th>Razon Social</th>
+                    <th>Cliente ID</th>
                     <th>CUIT</th>
                     <th>Direccion</th>
                     <th>Deshabilitado</th>
@@ -29,12 +30,21 @@
                 {
                     <tr>
                         <td>@item.RazonSocial</td>
+                        <td>@item.CliId</td>
                         <td>@item.Cuit</td>
                         <td>@item.Direccion</td>
                         <td>@item.Deshabilitado</td>
                         <td>
+                            @if (item.CliId == 9999)
+                            {
+
+                            }
+                            else
+                            {
+                                
                             <a class="btn alert-primary btn-sm" asp-action="Cliente_Detalle" asp-controller="Home" asp-route-CliId="@item.CliId">Editar</a>
                             <a class="btn alert-danger btn-sm" asp-action="Eliminar" asp-controller="Home" asp-route-CliId="@item.CliId">Eliminar</a>
+                            }
                         </td>
                     </tr>
                 }
