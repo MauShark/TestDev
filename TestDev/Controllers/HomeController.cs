@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using System.Diagnostics;
 using System.Security.Claims;
@@ -73,6 +74,17 @@ namespace TestDev.Controllers
         [HttpPost]
         public IActionResult Eliminar(Cliente oCliente)
         {
+
+            try
+            {
+                _DBcontext.Database.ExecuteSqlRaw("EXEC FC_Cliente_delete @CliId", new SqlParameter("@CliId", oCliente.CliId));
+            }catch (Exception ex)
+            {
+                Console.WriteLine($"Error al ejecutar el stored procedure: {ex.Message}");
+                return RedirectToAction("Eliminar", "Home");
+            }
+
+
             _DBcontext.Clientes.Remove(oCliente);
 
             _DBcontext.SaveChanges();

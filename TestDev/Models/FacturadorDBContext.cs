@@ -20,6 +20,9 @@ namespace TestDev.Models
         public virtual DbSet<Cliente> Clientes { get; set; } = null!;
         public virtual DbSet<FacturaCabecera> FacturaCabeceras { get; set; } = null!;
         public virtual DbSet<FacturaDetalle> FacturaDetalles { get; set; } = null!;
+        public virtual DbSet<FacturasClienteHist> FacturasClienteHists { get; set; } = null!;
+        public virtual DbSet<VistaFactura> VistaFacturas { get; set; } = null!;
+        public virtual DbSet<VistaFacturasCliente> VistaFacturasClientes { get; set; } = null!;
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -133,6 +136,63 @@ namespace TestDev.Models
                     .HasForeignKey(d => d.FactId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_Factura_Detalle_Factura_Cabecera");
+            });
+
+            modelBuilder.Entity<FacturasClienteHist>(entity =>
+            {
+                entity.HasNoKey();
+
+                entity.ToTable("Facturas_ClienteHIST");
+
+                entity.Property(e => e.ClienteId).HasColumnName("Cliente_ID");
+
+                entity.Property(e => e.FcCabeceraId).HasColumnName("FcCabecera_ID");
+
+                entity.Property(e => e.FecCreaReg)
+                    .HasColumnType("datetime")
+                    .HasDefaultValueSql("(getdate())");
+
+                entity.Property(e => e.Id)
+                    .ValueGeneratedOnAdd()
+                    .HasColumnName("id");
+            });
+
+            modelBuilder.Entity<VistaFactura>(entity =>
+            {
+                entity.HasNoKey();
+
+                entity.ToView("VistaFacturas");
+
+                entity.Property(e => e.Estado)
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.FcId).HasColumnName("FC_ID");
+
+                entity.Property(e => e.Total).HasColumnType("decimal(38, 0)");
+            });
+
+            modelBuilder.Entity<VistaFacturasCliente>(entity =>
+            {
+                entity.HasNoKey();
+
+                entity.ToView("VistaFacturasClientes");
+
+                entity.Property(e => e.Cuit)
+                    .HasMaxLength(16)
+                    .IsUnicode(false)
+                    .HasColumnName("CUIT");
+
+                entity.Property(e => e.FcId).HasColumnName("FC_ID");
+
+                entity.Property(e => e.FechaAlta)
+                    .HasColumnType("datetime")
+                    .HasColumnName("Fecha_Alta");
+
+                entity.Property(e => e.RazonSocial)
+                    .HasMaxLength(50)
+                    .IsUnicode(false)
+                    .HasColumnName("Razon_Social");
             });
 
             OnModelCreatingPartial(modelBuilder);

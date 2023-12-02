@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using TestDev.Models;
 using TestDev.Controllers;
 using TestDev.Models.ViewModels;
+using Microsoft.Data.SqlClient;
 
 namespace TestDev.Controllers
 {
@@ -61,12 +62,13 @@ namespace TestDev.Controllers
             {
                 oCabeceraVM.oCabecera.FcId = 0;
                 _DBcontext.FacturaCabeceras.Add(oCabeceraVM.oCabecera);
-
+                _DBcontext.Database.ExecuteSqlRaw("EXEC Fc_Client_Hist_insert @FcId , @CliId", new SqlParameter("@FcId", id), new SqlParameter("@CliId",oCabeceraVM.oCabecera.CliId));
             }
             else
             {
                 _DBcontext.Entry(exists).CurrentValues.SetValues(oCabeceraVM.oCabecera);
                 // _DBcontext.FacturaCabeceras.Update(oCabeceraVM.oCabecera);
+
             }
             _DBcontext.SaveChanges();
 
