@@ -57,12 +57,13 @@ namespace TestDev.Controllers
             int id = oCabeceraVM.oCabecera.FcId;
 
             FacturaCabecera exists = _DBcontext.FacturaCabeceras.Find(id);
-
+            _DBcontext.Database.ExecuteSqlRaw("EXEC Fc_Client_Hist_insert @FcId , @CliId", new SqlParameter("@FcId", id), new SqlParameter("@CliId", oCabeceraVM.oCabecera.CliId));
+            
             if (exists == null)
             {
                 oCabeceraVM.oCabecera.FcId = 0;
                 _DBcontext.FacturaCabeceras.Add(oCabeceraVM.oCabecera);
-                _DBcontext.Database.ExecuteSqlRaw("EXEC Fc_Client_Hist_insert @FcId , @CliId", new SqlParameter("@FcId", id), new SqlParameter("@CliId",oCabeceraVM.oCabecera.CliId));
+                //_DBcontext.Database.ExecuteSqlRaw("EXEC Fc_Client_Hist_insert @FcId , @CliId", new SqlParameter("@FcId", id), new SqlParameter("@CliId",oCabeceraVM.oCabecera.CliId));
             }
             else
             {
