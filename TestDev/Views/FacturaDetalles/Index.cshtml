@@ -1,0 +1,66 @@
+﻿@model IEnumerable<TestDev.Models.FacturaDetalle>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.FechaAlta)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Cant)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Precio)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Monto)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Art)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Fact)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.FechaAlta)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Cant)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Precio)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Monto)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Art.ArtId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Fact.FcId)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.FcDtlId">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.FcDtlId">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.FcDtlId">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

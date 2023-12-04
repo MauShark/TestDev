@@ -47,6 +47,7 @@
                         <td>
                             <a class="btn alert-primary btn-sm" asp-action="Factura_Cabecera" asp-controller="FC" asp-route-FcID="@item.FcId">Editar</a>
                             <a class="btn alert-danger btn-sm" asp-action="Factura_Eliminar" asp-controller="FC" asp-route-FcID="@item.FcId">Eliminar</a>
+                            <a class="btn alert-info btn-sm" asp-action="Create" asp-controller="FacturaDetalles" asp-route-FcID="@item.FcId">Redirect</a>
                         </td>
                        
                     </tr>

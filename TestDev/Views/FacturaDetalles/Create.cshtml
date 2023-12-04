@@ -1,0 +1,64 @@
+﻿@* @model TestDev.Models.FacturaDetalle *@
+@model TestDev.Models.ViewModels.FacturaDetalleVM;
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Create</h1>
+
+<h4>FacturaDetalle</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="oDetalle.FactId" class="control-label"></label>
+                @* <input asp-for="oDetalle.FactId" class="form-control" /> *@
+                
+                 @if(Model.oDetalle.FactId == 0){
+                    <input asp-for="oDetalle.FactId" class="form-control" />
+                }else
+                {
+                    <label asp-for="oDetalle.FactId" class="control-label">@Model.oDetalle.FactId</label>
+                    <input asp-for="oDetalle.FactId" class="form-control" value="FactId" disabled />
+                } 
+                    @* <select asp-for="FactId" class ="form-control" asp-items="ViewBag.FactId"></select> *@
+            </div>
+            <div class="form-group">
+                <label asp-for="oDetalle.FechaAlta" class="control-label"></label>
+                <input asp-for="oDetalle.FechaAlta" class="form-control" />
+                <span asp-validation-for="oDetalle.FechaAlta" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="oDetalle.ArtId" class="control-label"></label>
+                <select asp-for="oDetalle.ArtId" class="form-control" asp-items="ViewBag.ArtId"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="oDetalle.Cant" class="control-label"></label>
+                <input asp-for="oDetalle.Cant" class="form-control" />
+                <span asp-validation-for="oDetalle.Cant" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="oDetalle.Precio" class="control-label"></label>
+                <input asp-for="oDetalle.Precio" class="form-control" />
+                <span asp-validation-for="oDetalle.Precio" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="oDetalle.Monto" class="control-label"></label>
+                <input asp-for="oDetalle.Monto" class="form-control" />
+                <span asp-validation-for="oDetalle.Monto" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+

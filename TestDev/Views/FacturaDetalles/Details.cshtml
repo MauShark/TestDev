@@ -1,0 +1,55 @@
+﻿@model TestDev.Models.FacturaDetalle
+
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>FacturaDetalle</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.FechaAlta)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.FechaAlta)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Cant)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Cant)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Precio)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Precio)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Monto)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Monto)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Art)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Art.ArtId)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Fact)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Fact.FcId)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model?.FcDtlId">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

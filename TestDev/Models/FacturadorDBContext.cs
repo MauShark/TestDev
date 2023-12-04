@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
+using TestDev.Models.ViewModels;
 
 namespace TestDev.Models
 {
@@ -23,6 +24,7 @@ namespace TestDev.Models
         public virtual DbSet<FacturasClienteHist> FacturasClienteHists { get; set; } = null!;
         public virtual DbSet<VistaFactura> VistaFacturas { get; set; } = null!;
         public virtual DbSet<VistaFacturasCliente> VistaFacturasClientes { get; set; } = null!;
+        
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
