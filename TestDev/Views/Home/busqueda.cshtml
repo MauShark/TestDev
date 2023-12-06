@@ -1,0 +1,46 @@
+﻿@model List<TestDev.Models.ViewModels.ClienteVM>
+
+@{
+    ViewData["Title"] = "busqueda";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Busqueda de Clientes</h1>
+@if (ViewBag.ErrorMessage != null)
+{
+    <div class="alert alert-danger">@ViewBag.ErrorMessage</div>
+}
+else if (ViewBag.SuccessMessage != null)
+{
+    <div class="alert alert-success">@ViewBag.SuccessMessage</div>
+}
+
+<div class="row">
+    <div class="col-sm-4">
+        <form asp-action="busqueda" asp-controller="Home" method="get">
+            <div class="mb-2">
+                <label class="form-label">Razon social:</label>
+                <input class="form-control form-control-sm" name="condition" type="text" />
+            </div>
+
+            <button class="btn btn-primary btn-sm w-25" type="submit">Buscar</button>
+        </form>
+ 
+        @if (Model != null && Model.Any())
+        {
+            <h2>Clientes para deshabilitar</h2>
+
+            <form asp-action="busqueda_deshabilitar" asp-controller="Home" method="post">
+                @foreach (var cliente in Model)
+                {
+                    <div class="mb-2">
+                        <input type="checkbox" name="clientesSeleccionados" value="@cliente.oCliente.CliId" />
+                        @cliente.oCliente.RazonSocial
+                    </div>
+                }
+
+                <button type="submit" class="btn btn-danger">Deshabilitar clientes seleccionados</button>
+            </form>
+        } 
+    </div>
+</div>

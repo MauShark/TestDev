@@ -4,7 +4,6 @@
     {
         public Cliente oCliente { get; set; }
 
-        
 
     }
 }

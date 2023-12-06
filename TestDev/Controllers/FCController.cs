@@ -57,19 +57,30 @@ namespace TestDev.Controllers
             int id = oCabeceraVM.oCabecera.FcId;
 
             FacturaCabecera exists = _DBcontext.FacturaCabeceras.Find(id);
-            _DBcontext.Database.ExecuteSqlRaw("EXEC Fc_Client_Hist_insert @FcId , @CliId", new SqlParameter("@FcId", id), new SqlParameter("@CliId", oCabeceraVM.oCabecera.CliId));
+            //_DBcontext.Database.ExecuteSqlRaw("EXEC Fc_Client_Hist_insert @FcId , @CliId", new SqlParameter("@FcId", id), new SqlParameter("@CliId", oCabeceraVM.oCabecera.CliId));
             
             if (exists == null)
-            {
-                oCabeceraVM.oCabecera.FcId = 0;
-                _DBcontext.FacturaCabeceras.Add(oCabeceraVM.oCabecera);
+            {   
+                var ValidClient= _DBcontext.Clientes.Find(oCabeceraVM.oCabecera.CliId);
+                if (ValidClient != null) { 
+                    oCabeceraVM.oCabecera.FcId = 0;
+                    _DBcontext.FacturaCabeceras.Add(oCabeceraVM.oCabecera);
+                    _DBcontext.Database.ExecuteSqlRaw("EXEC Fc_Client_Hist_insert @FcId , @CliId", new SqlParameter("@FcId", id), new SqlParameter("@CliId", oCabeceraVM.oCabecera.CliId));
+                }
+                else
+                {
+                    ViewBag.ErrorMessage = "No es un cliente valido";
+                    return RedirectToAction("Factura_Cabecera", "FC");
+                }
                 //_DBcontext.Database.ExecuteSqlRaw("EXEC Fc_Client_Hist_insert @FcId , @CliId", new SqlParameter("@FcId", id), new SqlParameter("@CliId",oCabeceraVM.oCabecera.CliId));
+                
             }
             else
             {
+                _DBcontext.Database.ExecuteSqlRaw("EXEC Fc_Client_Hist_insert @FcId , @CliId", new SqlParameter("@FcId", id), new SqlParameter("@CliId", oCabeceraVM.oCabecera.CliId));
                 _DBcontext.Entry(exists).CurrentValues.SetValues(oCabeceraVM.oCabecera);
                 // _DBcontext.FacturaCabeceras.Update(oCabeceraVM.oCabecera);
-
+                
             }
             _DBcontext.SaveChanges();
 

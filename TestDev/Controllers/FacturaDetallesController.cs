@@ -59,6 +59,7 @@ namespace TestDev.Controllers
             if (fcID != 0)
             {
                 facturaDetalleVM.oDetalle = _DBcontext.FacturaDetalles.Find(fcID);
+                
             }
 
 
@@ -73,14 +74,14 @@ namespace TestDev.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(/*[Bind("FactId,FcDtlId,FechaAlta,ArtId,Cant,Precio,Monto")]*/ FacturaDetalle facturaDetalle)
+        public IActionResult Create(FacturaDetalleVM oDetalleVM)
         {
 
 
 
-            if (facturaDetalle.FcDtlId == 0)
+            if (oDetalleVM.oDetalle.FcDtlId == 0)
             {
-                _DBcontext.FacturaDetalles.Add(facturaDetalle);
+                _DBcontext.FacturaDetalles.Add(oDetalleVM.oDetalle);
             }
             
             

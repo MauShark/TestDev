@@ -7,6 +7,10 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+@if (!string.IsNullOrEmpty(ViewBag.ErrorMessage))
+{
+    <div class="alert alert-danger">@ViewBag.ErrorMessage</div>
+}
 
 @if (Model.oCliente.CliId == 0)
 {

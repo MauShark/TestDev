@@ -5,6 +5,7 @@ using System.Diagnostics;
 using System.Security.Claims;
 using TestDev.Models;
 using TestDev.Models.ViewModels;
+using System.Linq;
 
 namespace TestDev.Controllers
 {
@@ -48,10 +49,20 @@ namespace TestDev.Controllers
         [HttpPost]
         public IActionResult Cliente_Detalle(ClienteVM oClienteVM)
         {
-            if(oClienteVM.oCliente.CliId == 0)
-            {
-                _DBcontext.Clientes.Add(oClienteVM.oCliente);
+            string Cuit = oClienteVM.oCliente.Cuit;
 
+
+            if (oClienteVM.oCliente.CliId == 0)
+            {
+                var CuitExists = _DBcontext.Clientes.FirstOrDefault(c=>c.Cuit == Cuit);
+                if (CuitExists is null) { 
+
+                    _DBcontext.Clientes.Add(oClienteVM.oCliente);
+                }else
+                {
+                    ViewBag.ErrorMessage = "El cuit ingresado ya pertenece a un cliente.";
+                    return View("Cliente_Detalle", oClienteVM);
+                }
 
             }
             else
@@ -92,8 +103,58 @@ namespace TestDev.Controllers
             return RedirectToAction("Index","Home");
         }
 
+        [HttpGet]
+
+        
+        public IActionResult busqueda(string condition)
+        {
+            if (condition == null)
+            {
+                return View("busqueda");
+            }
+
+            List<ClienteVM> list = new List<ClienteVM>();
+
+            
+            var clientes = _DBcontext.Clientes
+                .Where(c => c.RazonSocial.Contains(condition))
+                .ToList();
+
+            foreach (var cliente in clientes)
+            {
+                list.Add(  new ClienteVM { oCliente = cliente });
+            }
+
+            return View("Busqueda", list);
+        }
+
+        [HttpPost]
 
 
+        public IActionResult busqueda_deshabilitar(List<int> clientesSeleccionados)
+        {
+            if (clientesSeleccionados.Count == 0)
+            {
+                ViewBag.ErrorMessage = "no se seleccionaron clientes";
+                return View("busqueda");
+            }
+
+            foreach (var clientId in clientesSeleccionados)
+            {
+                var cliente = _DBcontext.Clientes.Find(clientId);
+
+                if (cliente != null)
+                {
+                    cliente.Deshabilitado = true;
+                    _DBcontext.Clientes.Update(cliente);
+                }
+            }
+
+            _DBcontext.SaveChanges();
+            ViewBag.SuccessMessage = "Clientes deshabilitados correctamente.";
+
+            return View("busqueda");
+        }
 
     }
 
