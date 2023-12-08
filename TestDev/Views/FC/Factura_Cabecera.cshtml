@@ -4,15 +4,22 @@
     ViewData["Title"] = "Factura_Cabecera";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+@if (ViewBag.Error != null)
+{
+    <div class="alert alert-danger">
+        @ViewBag.Error
+    </div>
+}
 
 @if (Model.oCabecera.FcId == 0)
 {
-    <h1>Crear Factura</h1>
+    <h1>Crear Factura</h1> 
 }
 else
 {
     <h1>Editar Factura</h1>
 }
+
 
 <div class="row">
     <div class="col-sm-4">
